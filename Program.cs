@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Vjezba.Data;
+using Vjezba.Mapping;
 using Vjezba.Models.Dbo;
+using Vjezba.Services.Implementations;
+using Vjezba.Services.Interfaces;
 
 namespace Vjezba
 {
@@ -35,6 +38,10 @@ namespace Vjezba
               .AddRoles<IdentityRole>()
               .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+            
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+            builder.Services.AddScoped<IAccountService,AccountService>();
+
 
             var app = builder.Build();
 
